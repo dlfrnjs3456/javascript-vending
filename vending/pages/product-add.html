@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>상품 관리</title>
+    <link rel="stylesheet" href="../assets/css.css">
+    <h1>상품 관리</h1>
+    <script src="https://cdn.jsdelivr.net/npm/@woowacourse/mission-utils@1.0.1/dist/mission-utils.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button id="product-add-menu">상품 관리</button>
+      <button id="vending-machine-manage-menu">잔돈 충전</button>
+      <button id="product-purchase-menu">상품 구매</button>
+    </div>
+    <div>
+      <h3>상품 추가하기</h4>
+      <input type="text" id="product-name-input"/>
+      <input type="number" id="product-price-input"/>
+      <input type="number" id="product-quantity-input"/>
+      <button id="product-add-button">추가하기</button>
+    </div>
+    <div >
+      <h3>상품 현황</h4>
+      <table class="product-manage-item">
+        <tr>
+          <th scope="col" class="product-manage-name">상품명</td>
+          <th scope="col" class="product-manage-price">가격</td>
+          <th scope="col" class="product-manage-quantity">수량</td>
+        </tr>
+      </table>
+    </div>
+    <script type="module" src="/src/controller/ProductAddController.js"></script>
+  </body>
+</html>

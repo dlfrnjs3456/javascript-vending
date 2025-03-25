@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>상품 구매</title>
+    <link rel="stylesheet" href="../assets/css.css">
+    <h1>상품 구매 및 잔돈 반환</h1>
+    <script src="https://cdn.jsdelivr.net/npm/@woowacourse/mission-utils@1.0.1/dist/mission-utils.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button id="product-add-menu">상품 관리</button>
+      <button id="vending-machine-manage-menu">잔돈 충전</button>
+      <button id="product-purchase-menu">상품 구매</button>
+    </div>
+    <div>
+      <h3>금액 투입</h4>
+      <input type="number" id="charge-input"/>
+      <button id="charge-button">투입하기</button>
+      <div>투입한 금액:<span id="input-charge"></span></div>
+    </div>
+    <div>
+      <h3>구매할 수 있는 상품 현황</h3>
+        <table id="product-purchase-item">
+          <tr>
+              <th scope="col" class="product-manage-name">상품명</td>
+              <th scope="col" class="product-manage-price">가격</td>
+              <th scope="col" class="product-manage-quantity">수량</td>
+              <th scrop="col" class="">구매</td> 
+          </tr>
+          </table>
+    </div>
+    <div>
+      <h3>잔돈</h3>
+      <button id="coin-return-button">반환하기</button>
+      <table>
+        <tr>
+          <th scope="col">동전</th>
+          <th scope="col">개수</th>
+        </tr>
+        <tr>
+          <td scope="col">500원</td>
+          <td scope="col" id="coin-500-quantity"></td>
+        </tr>
+        <tr>
+          <td scope="col">100원</td>
+          <td scope="col" id="coin-100-quantity"></td>
+        </tr>
+        <tr>
+          <td scope="col">50원</td>
+          <td scope="col" id="coin-50-quantity"></td>
+        </tr>
+        <tr>
+          <td scope="col">10원</td>
+          <td scope="col" id="coin-10-quantity"></td>
+        </tr>
+      </table>
+    </div>
+    <script type="module" src="/src/controller/ProductPurchaseController.js"></script>
+  </body>
+</html>
