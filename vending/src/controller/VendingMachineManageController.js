@@ -1,5 +1,6 @@
 import VendingMachineManageModel from "../model/VendingMachineManageModel.js"
 import VendingMachineManageView from "../view/VendingMachineManageView.js"
+import {validateCharge} from '../model/Utils/validateCharge.js'
 
 export default class VendingMachineManageController{
     constructor(model, view) {
@@ -8,6 +9,7 @@ export default class VendingMachineManageController{
     }
 
     initialize = () => { 
+        this.model.updateCoinCharge();
         this.view.updateCharge(this.model.getPrevCharge());
         this.view.updateCoinTable(this.model.retCoinList());
         this.view.bindVendingMachineChargeBtn(this.handleVendingMachineChargeBtn.bind(this));
@@ -18,7 +20,7 @@ export default class VendingMachineManageController{
         debugger
         const prevCharge = this.model.getPrevCharge();
         let inputCharge = this.view.getChargeInput();
-        if(!this.model.validateCharge(inputCharge)) {
+        if(!validateCharge(inputCharge)) {
             alert("금액은 100원 이상 10원 단위로 나누어 떨어지게 넣어주세요");
             return;
         }

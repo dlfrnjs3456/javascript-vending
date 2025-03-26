@@ -43,7 +43,7 @@ function display() {
     const retCoinList = JSON.parse(localStorage.getItem("retCoinList"));
     if (retCoinList !== null) {
         [10, 50, 100, 500].forEach((val, index) => {
-            document.getElementById(`coin-${val}-quantity`).innerText = retCoinList[val].count + "개";
+            document.getElementById(`coin-${val}-quantity`).textContent = retCoinList[val].count + "개";
         });
     }
 }
@@ -91,7 +91,6 @@ function initEventListeners() {
     document.querySelectorAll(".purchase-button").forEach(button => {
         button.addEventListener("click", function (event) {
             const row = event.target.closest("tr");
-            debugger
             let currentCharge = Number(window.localStorage.getItem("input-charge"));
             const productPrice = Number(row.children[1].dataset.productPrice);
             const productQuantity = Number(row.children[2].dataset.productQuantity);
@@ -99,7 +98,7 @@ function initEventListeners() {
                 currentCharge -= productPrice;
                 window.localStorage.setItem("input-charge", currentCharge);
                 row.children[2].dataset.productQuantity = productQuantity - 1;
-                row.children[2].innerText = productQuantity - 1;
+                row.children[2].textContent = productQuantity - 1;
                 display();
                 saveTable("product-purchase-item");
             }

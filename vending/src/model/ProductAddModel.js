@@ -1,10 +1,5 @@
 export default class ProductAddModel {
 
-
-    validateProductPrice(price){ 
-        return Number.isInteger(price) && price % 10 === 0 && price >= 100;
-    }
-
     validateProductQuantity(quantity){
         return Number.isInteger(quantity) && quantity >= 0;
     }

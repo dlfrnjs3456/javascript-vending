@@ -37,14 +37,12 @@ export default class ProductAddView {
 
     updateProductTable = () => {
        const newRow = this.productTbl.insertRow();
-        debugger
-       const rowCol1 = newRow.insertCell(0);
-       const rowCol2 = newRow.insertCell(1);
-       const rowCol3 = newRow.insertCell(2);
-     
-       rowCol1.textContent = localStorage.getItem("product-manage-name");
-       rowCol2.textContent = localStorage.getItem("product-manage-price");
-       rowCol3.textContent = localStorage.getItem("product-manage-quantity");
+
+       const productArr = ["product-manage-name", "product-manage-price", "product-manage-quantity"];
+       for(let i=0; i<3; i++) {
+        newRow.insertCell(i).textContent = localStorage.getItem(productArr[i]);
+       }
+       
        saveTable(this.productTbl);
     }
 

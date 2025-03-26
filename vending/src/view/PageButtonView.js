@@ -5,7 +5,7 @@ export default class PageButtonView {
         const app = document.getElementById("app");
 
         buttons.forEach(({text, id}) => {
-            app.appendChild(createBtn(text,id));
+            app.appendChild(createBtn(text,id, "id"));
         })
     }
 

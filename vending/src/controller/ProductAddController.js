@@ -1,5 +1,6 @@
 import ProductAddModel from '../model/ProductAddModel.js'
 import ProductAddView from '../view/ProductAddView.js'
+import {validateCharge} from '../model/Utils/validateCharge.js'
 
 export default class ProductAddController {
     constructor(model, view) { 
@@ -18,7 +19,7 @@ export default class ProductAddController {
         const productPrice = this.view.getProductPrice();
         const productQuantity = this.view.getProductQuantity();
 
-        if(!this.model.validateProductPrice(productPrice)) {
+        if(!validateCharge(productPrice)) {
             alert("상품의 가격은 100원 이상이며 10원 단위로 나눠 떨어져야합니다!");
             return;
         }
