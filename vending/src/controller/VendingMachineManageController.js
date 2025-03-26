@@ -11,7 +11,7 @@ export default class VendingMachineManageController{
     initialize = () => { 
         this.model.updateCoinCharge();
         this.view.updateCharge(this.model.getPrevCharge());
-        this.view.updateCoinTable(this.model.retCoinList());
+        this.view.updateCoinTable(this.model.getCoinList());
         this.view.bindVendingMachineChargeBtn(this.handleVendingMachineChargeBtn.bind(this));
     }
 
@@ -28,7 +28,7 @@ export default class VendingMachineManageController{
         this.model.setCurrentCharge(saveCharge);
         this.view.updateCharge(saveCharge);
         this.model.seperateCoin(inputCharge);
-        this.view.updateCoinTable(this.model.retCoinList());
+        this.view.updateCoinTable(this.model.getCoinList());
     }
 
 }

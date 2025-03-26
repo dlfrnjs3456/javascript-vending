@@ -31,7 +31,7 @@ export default class VendingMachineModel {
         return currentCharge;
     }
 
-    retCoinList = () => {
+    getCoinList = () => {
         return JSON.parse(localStorage.getItem("coinList")) || {
             10: { count: 0 },
             50: { count: 0 },
@@ -41,7 +41,7 @@ export default class VendingMachineModel {
     }
 
     divideCharge = (inputCharge) => {
-        this.coinList = this.retCoinList();
+        this.coinList = this.getCoinList();
 
         while (inputCharge > 0) {
             inputCharge = this.calCharge(inputCharge, MissionUtils.Random.pickNumberInList([10, 50, 100, 500]));

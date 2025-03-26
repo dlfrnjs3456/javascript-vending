@@ -13,7 +13,7 @@ export default class ProductPurchaseController {
         this.view.bindChargeBtn(this.handleChargeBtn.bind(this));
         this.view.bindPurchaseBtn(this.handlePurchaseBtn.bind(this));
         this.view.bindCoinRetBtn(this.handleCoinRetBtn.bind(this));
-        this.view.updateInputCharge(this.model.getInputCharge());
+        this.view.renderTable(this.model.getRetCoinList(), this.model.getInputCharge()); //테이블 화면 업데이트
     }
 
     handleChargeBtn = (event) => {
@@ -30,7 +30,7 @@ export default class ProductPurchaseController {
 
     handlePurchaseBtn = (event) => {
         event.preventDefault();
-        const row = event.target.closest("tr");
+        const row = event.target.closest("tr"); //버튼을 누른 열 선택택
         const productPrice = this.model.getProductPrice(row); //상품 가격 가져오기
         const productQuantity = this.model.getProductQuantity(row); //상품 개수 가져오기
         let currentCharge = this.model.getInputCharge(); //현재 자금 가져오기
@@ -43,32 +43,22 @@ export default class ProductPurchaseController {
                 this.view.disablePurchaseBtn(row); //개수가 0개가 되면 버튼 비활성화
             }
             saveTable(this.view.getItemTbl());
-        } 
-        else {
-            alert("금액이 부족합니다!");
-            return;
+        } else {
+            return alert("금액이 부족합니다!");
         }
     }
 
     handleCoinRetBtn = (event) => {
         event.preventDefault();
-        debugger
-        console.log("test");
-        let retCoinList = {
-            10 : {count : 0},
-            50 : {count : 0},
-            100 : {count : 0},
-            500 : {count : 0}
-        };
-        let coinList = this.model.getCoinList();
-        if (coinList === null) {
-            alert("반환해줄 동전이 없습니다");
-            return;
+        let retCoinList = this.model.initRetCoinList(); // 반환 동전 테이블 초기화
+        let coinList = this.model.getCoinList(); // 기존에 잔돈 만들었던 테이블 가져오기
+        if (!coinList) {
+            return alert("반환해줄 동전이 없습니다");
         }
-        let currentCharge = this.model.getInputCharge();
+        let currentCharge = this.model.getInputCharge(); //현재 자판기에 투입한 현금
 
-        [500, 100, 50, 10].forEach((val, index) => {
-            while (currentCharge - val >= 0 && coinList[val].count !== 0) {
+        [500, 100, 50, 10].forEach(val => {
+            while (currentCharge - val >= 0 && coinList[val].count !== 0) { //자판기 현금이 떨어질 때 까지 반환
                 currentCharge -= val;
                 coinList[val].count--;
                 retCoinList[val].count++;
@@ -76,7 +66,8 @@ export default class ProductPurchaseController {
         });
         this.model.setInputCharge(currentCharge);
         this.model.setCoinList(coinList);
-        this.model.setRetCoinList(retCoinList);
+        this.model.setRetCoinList(retCoinList); //최신 상태로 업데이트
+        this.view.renderTable(this.model.getRetCoinList(), this.model.getInputCharge()); //업데이트된 화면으로 렌더링
     }
 }
 

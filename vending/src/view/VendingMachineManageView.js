@@ -21,7 +21,7 @@ export default class VendingMachineManageView {
     }
 
     updateCoinTable = (coinList) => {
-        [10,50,100,500].forEach((val,index) => {
+        [10,50,100,500].forEach(val => {
         document.getElementById(`vending-machine-coin-${val}-quantity`).textContent = coinList[val].count + "개";
     });
     }

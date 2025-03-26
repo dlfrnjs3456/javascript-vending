@@ -50,8 +50,8 @@ export default class ProductPurcaseModel {
         row.children[2].dataset.productQuantity = productQuantity;
     }
 
-    retCoin = () => {
-
+    initRetCoinList = () => {
+        return this.retCoinList;
     }
 
 }
