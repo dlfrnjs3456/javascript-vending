@@ -39,7 +39,7 @@ export default class ProductPurchaseController {
             this.view.updateInputCharge(currentCharge - productPrice);//금액에서 상품 가격만큼 마이너스로 업데이트
             this.model.setProductQuantity(row, productQuantity - 1);
             this.view.updateProductQuantity(row, productQuantity - 1); //개수 하나씩 하락
-            if(this.model.getProductQuantity(row) === 0) {
+            if (this.model.getProductQuantity(row) === 0) {
                 this.view.disablePurchaseBtn(row); //개수가 0개가 되면 버튼 비활성화
             }
             saveTable(this.view.getItemTbl());
@@ -56,17 +56,7 @@ export default class ProductPurchaseController {
             return alert("반환해줄 동전이 없습니다");
         }
         let currentCharge = this.model.getInputCharge(); //현재 자판기에 투입한 현금
-
-        [500, 100, 50, 10].forEach(val => {
-            while (currentCharge - val >= 0 && coinList[val].count !== 0) { //자판기 현금이 떨어질 때 까지 반환
-                currentCharge -= val;
-                coinList[val].count--;
-                retCoinList[val].count++;
-            }
-        });
-        this.model.setInputCharge(currentCharge);
-        this.model.setCoinList(coinList);
-        this.model.setRetCoinList(retCoinList); //최신 상태로 업데이트
+        this.model.retCoin(currentCharge, coinList, retCoinList);
         this.view.renderTable(this.model.getRetCoinList(), this.model.getInputCharge()); //업데이트된 화면으로 렌더링
     }
 }

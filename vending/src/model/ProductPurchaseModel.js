@@ -54,4 +54,16 @@ export default class ProductPurcaseModel {
         return this.retCoinList;
     }
 
+    retCoin = (currentCharge, coinList, retCoinList) => {
+        [500, 100, 50, 10].forEach(val => {
+            while (currentCharge - val >= 0 && coinList[val].count !== 0) { //자판기 현금이 떨어질 때 까지 반환
+                currentCharge -= val;
+                coinList[val].count--;
+                retCoinList[val].count++;
+            }
+        });
+        this.setInputCharge(currentCharge);
+        this.setCoinList(coinList);
+        this.setRetCoinList(retCoinList); //최신 상태로 업데이트
+    }
 }
